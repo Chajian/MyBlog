@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+	<meta charset="utf-8">
+	<title>主界面</title>
+	<style type="text/css">
+		div.top{
+			background-color: #1199c4;
+			height: 50px;
+			width: 90%;
+			font-size: 14px;
+			overflow-x: hidden;
+			overflow-y: hidden;
+			position: fixed;
+			top: 20px;
+			left: 5%;
+			right: 5%;
+		}
+		div.account{
+			font-size: 20px;
+			color: #1199C4;
+			position: fixed;
+			left: 30%;
+			top: 150px;
+
+		}
+		label.top.top{
+			position: relative;
+			top: 30px;
+			right: 183px;
+		}
+
+	</style>
+</head>
+<body>
+
+<script>
+	var v = new Vue({
+		data:{
+
+		},
+		methods:{
+			login:function(){
+				var account = document.getElementById('account');
+				var pass = document.getElementById('pass');
+				var xmlhttp;
+				if(window.XMLHttpRequest){
+					xmlhttp = new XMLHttpRequest();
+				}
+				else{
+					xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+				}
+				var url = 'http://localhost:8081/MyBlog/login?account='+account.value+'&pass='+pass.value;
+				xmlhttp.onreadystatechange=logined;
+				xmlhttp.open('POST',url,true);
+				xmlhttp.send();
+			},
+			logined:function(){
+				if(xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200){
+					var b = xmlHttpRequest.responseText;
+					if(b == "true"){
+						alert("登录成功！");
+					}else{
+						alert("登录失败！");
+					}
+				}
+			}
+		}
+	})
+
+
+</script>
+
+<div class="top">
+	<img src="img/left.png" style="
+				height: 16px;
+				width: 16px;
+				position: fixed;
+				top: 35px;
+				left: 40px;"/>
+
+	<img src="img/home.png" style="
+				height: 19px;
+				width: 19px;
+				position: fixed;
+				top: 33px;
+				left: 80px;" />
+
+	<label style="
+				font-size: 20px;
+				color: #ffffff;
+				position: fixed;
+				top: 30px;
+				left: 192px;"
+	>森源站</label>
+
+	<img src="img/setting.png" style="
+				height: 16px;
+				width: 16px;
+				position: fixed;
+				top: 35px;
+				right: 130px;" />
+</div>
+<div class="account">
+	<p>
+		<label>账号</label>
+		<input id="account" type="text" />
+	</p>
+	<p>
+		<label>密码</label>
+		<input id="pass" type="text" />
+	</p>
+	<p>
+		<input id="login" type="button" style="
+					background-color: #1199C4;
+					width: 100px;
+					font-size:20px;
+					color: aliceblue;" value="登陆" />
+
+		<input id="register" type="button" style="
+					background-color: #1199C4;
+					width: 100px;
+					font-size:20px;
+					color: aliceblue;
+					position: relative;
+					left: 10px;" value="注册" onclick="location.href='register.html'" />
+	</p>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title></title>
+    <style type="text/css">
+        form{
+            width: 100%;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <p >
+        <label >账号</label>
+        <input id="account"  type="text" tabindex="1"/>
+    </p>
+    <p>
+        <label >密码</label>
+        <input id="pass" type="text" tabindex="2"/>
+    </p>
+    <p>
+        <label >姓名</label>
+        <input id="name" type="text" tabindex="3"/>
+    </p>
+    <p>
+        <label >信息</label>
+        <input id="info" type="text" style="width: 200px;" tabindex="4" />
+    </p>
+    <p>
+        <input type="radio"  id="gender" tabindex="5" value='男'/>男
+        <input type="radio"  id="gender" tabindex="5" value='女'/>女
+    </p>
+    <p>
+        <input type="button" value="提交" onclick="register()" tabindex="6"/>
+    </p>
+
+</div>
+<script>
+    function createXjr(){
+        var xhr = null;
+        if(window.XMLHttpRequest){
+            xhr = new XMLHttpRequest();
+        }
+        else if(window.ActiveXObject){
+            xhr = new ActiveXObject("Microsoft.XMLHTTP");//ie低版本
+        }
+        return xhr;
+    }
+    function register() {
+        var account = document.getElementById('account').value
+        var pass = document.getElementById('pass').value
+        var info = document.getElementById('info').value
+        var gender = document.getElementById('gender').value
+        var name = document.getElementById('name').value
+        var xhr = createXjr();
+        xhr.open('POST','./register.action?account='+account+'&pass='+pass+'&info='+info+'&gender='+gender+'&name='+name,true);
+        xhr.setRequestHeader('Context-Type','application/x-www-form-urlencoded');
+        xhr.onreadystatechange = function () {
+            if(this.readyState==4 && this.status == 200){
+                console.log(xhr.responseText);
+            }
+        }
+        // var context = 'account='+account+'&pass='+pass;
+        xhr.send();
+        return false;
+    }
+</script>
+</body>
+</html>
